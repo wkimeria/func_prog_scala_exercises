@@ -10,6 +10,16 @@ object Chapter_6_1 {
     println(i2)
     val (i3, rg3) = double(rg2)
     println(i3)
+    val (i4, i5) = intDouble(rng)
+    println("---------------------")
+    println(i4._1)
+    println(i4._2)
+
+    val (i6, i7) = double3(rng)
+    println("---------------------")
+    println(i6._1)
+    println(i6._2)
+    println(i6._3)
   }
 
   /*
@@ -38,4 +48,22 @@ object Chapter_6_1 {
   Write functions to generate an (Int, Double) pair, a (Double, Int) pair, and a (Double, Double, Double) 3-tuple.
   You should be able to reuse the functions you’ve already written.
   */
+  def intDouble(rng: RNG): ((Int, Double), RNG)= {
+    val (l1, r1) = rng.nextInt
+    val (l2, r2) = double(r1)
+    ((l1, l2), r2)
+  }
+
+  def doubleInt(rng: RNG): ((Double,Int), RNG) = {
+    val (l1, r1) = rng.nextInt
+    val (l2, r2) = double(r1)
+    ((l2, l1), r2)
+  }
+
+  def double3(rng: RNG): ((Double, Double, Double), RNG) = {
+    val (l1, r1) = double(rng)
+    val (l2, r2) = double(r1)
+    val (l3, r3) = double(r2)
+    ((l1, l2, l3), r2)
+  }
 }
