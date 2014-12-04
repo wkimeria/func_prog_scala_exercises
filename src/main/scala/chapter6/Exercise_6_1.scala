@@ -1,5 +1,7 @@
 package chapter6
 
+import chapter6.RNG
+
 object Chapter_6_1 {
   def main(args: Array[String]) = {
 
@@ -20,6 +22,8 @@ object Chapter_6_1 {
     println(i6._1)
     println(i6._2)
     println(i6._3)
+    val intVals = ints(10)(rng)
+    println(intVals._1)
   }
 
   /*
@@ -65,5 +69,22 @@ object Chapter_6_1 {
     val (l2, r2) = double(r1)
     val (l3, r3) = double(r2)
     ((l1, l2, l3), r2)
+  }
+
+  /*
+  Exercise 6.4
+  Write a function to generate a list of random integers.
+  */
+
+  def ints(count: Int)(rng: RNG): (List[Int], RNG) = {
+    def loop(c: Int, rng: RNG, acc: List[Int]):(List[Int], RNG) = {
+      if(c == count) (acc, rng)
+      else{
+        val (i, r) = rng.nextInt
+        val lst = acc :+ i
+        loop(c+1, r, lst)
+      }
+    }
+    loop(0, rng, List[Int]())
   }
 }
